@@ -2,8 +2,11 @@
 
 统一调度三种模式，管理状态与流程。
 
-## 未来实现
-- 模式状态机：teaching / assist / student。
-- 模式切换时的数据同步与安全检查。
-- 事件总线与任务生命周期管理。
-- 与 UI、LLM、执行器之间的协同编排。
+## 当前实现（Phase 4.1）
+- `ModeStateMachine.swift`：三模式状态机（`teaching` / `assist` / `student`）。
+- 合法切换与守卫条件校验：不满足时拒绝切换并输出结构化日志。
+- 每种模式能力白名单：限制可调用能力集合。
+- 日志接口：`OrchestratorStateLogger`，默认 `StdoutOrchestratorStateLogger` 输出 JSON 行日志。
+
+## 文档
+- 设计说明：`mode-state-machine-v0.md`

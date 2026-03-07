@@ -163,14 +163,17 @@
 ## 阶段 4：模式编排（Day 10 ~ Day 14）
 
 ### TODO 4.1 模式状态机
-- [ ] 定义 `teaching / assist / student` 状态与切换条件。
-- [ ] 定义每种模式可调用的能力白名单。
+- [x] 定义 `teaching / assist / student` 状态与切换条件。
+- [x] 定义每种模式可调用的能力白名单。
 
 **输出物**
-- `core/orchestrator` 状态机。
+- `core/orchestrator/ModeStateMachine.swift`
+- `core/orchestrator/mode-state-machine-v0.md`
+- `core/contracts/OrchestratorContracts.swift`
+- `apps/macos/Sources/OpenStaffOrchestratorCLI/*`
 
 **验收标准**
-- [ ] 非法状态切换被拒绝并记录日志。
+- [x] 非法状态切换被拒绝并记录日志（`make orchestrator` 默认输出结构化日志，非法切换返回退出码 `2`）。
 
 ### TODO 4.2 辅助模式闭环
 - [ ] 下一步预测策略（先规则后模型）。
