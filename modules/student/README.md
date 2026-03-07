@@ -2,7 +2,11 @@
 
 学生模式模块。
 
-## 未来实现
-- 根据老师下发目标自主规划执行步骤。
-- 调用 OpenClaw skills 执行自动化流程。
-- 生成完整执行日志与结果摘要，供老师审阅。
+## 当前实现（Phase 4.3）
+- 已实现最小闭环：任务目标输入 -> 规则自动规划 -> 技能执行（模拟） -> 结构化审阅报告输出。
+- 运行入口：`make student ARGS="--goal '在 Safari 中复现点击流程' --knowledge core/knowledge/examples/knowledge-item.sample.json"`
+
+## 后续实现
+- 规划策略从规则扩展到模型。
+- 执行器从模拟调用升级为 OpenClaw 实际执行。
+- 审阅报告加入老师反馈回写与知识纠偏。

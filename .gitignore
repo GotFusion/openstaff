@@ -24,4 +24,7 @@ data/knowledge/*
 data/logs/*
 !data/logs/.gitkeep
 
+data/reports/*
+!data/reports/.gitkeep
+
 data/skills/

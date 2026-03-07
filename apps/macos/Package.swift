@@ -12,7 +12,8 @@ let package = Package(
         .executable(name: "OpenStaffTaskSlicerCLI", targets: ["OpenStaffTaskSlicerCLI"]),
         .executable(name: "OpenStaffKnowledgeBuilderCLI", targets: ["OpenStaffKnowledgeBuilderCLI"]),
         .executable(name: "OpenStaffOrchestratorCLI", targets: ["OpenStaffOrchestratorCLI"]),
-        .executable(name: "OpenStaffAssistCLI", targets: ["OpenStaffAssistCLI"])
+        .executable(name: "OpenStaffAssistCLI", targets: ["OpenStaffAssistCLI"]),
+        .executable(name: "OpenStaffStudentCLI", targets: ["OpenStaffStudentCLI"])
     ],
     targets: [
         .executableTarget(
@@ -38,6 +39,10 @@ let package = Package(
         .executableTarget(
             name: "OpenStaffAssistCLI",
             path: "Sources/OpenStaffAssistCLI"
+        ),
+        .executableTarget(
+            name: "OpenStaffStudentCLI",
+            path: "Sources/OpenStaffStudentCLI"
         )
     ]
 )

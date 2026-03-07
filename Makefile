@@ -6,9 +6,10 @@ SLICE_TARGET := OpenStaffTaskSlicerCLI
 KNOWLEDGE_TARGET := OpenStaffKnowledgeBuilderCLI
 ORCHESTRATOR_TARGET := OpenStaffOrchestratorCLI
 ASSIST_TARGET := OpenStaffAssistCLI
+STUDENT_TARGET := OpenStaffStudentCLI
 ARGS ?=
 
-.PHONY: build dev capture slice knowledge orchestrator assist llm-prompts llm-validate llm-call llm-retry-demo skill-build skills-demo skills-validate-demo
+.PHONY: build dev capture slice knowledge orchestrator assist student llm-prompts llm-validate llm-call llm-retry-demo skill-build skills-demo skills-validate-demo
 
 build:
 	swift build --package-path $(APP_PACKAGE_PATH)
@@ -30,6 +31,9 @@ orchestrator:
 
 assist:
 	swift run --package-path $(APP_PACKAGE_PATH) $(ASSIST_TARGET) $(ARGS)
+
+student:
+	swift run --package-path $(APP_PACKAGE_PATH) $(STUDENT_TARGET) $(ARGS)
 
 llm-prompts:
 	python3 scripts/llm/render_knowledge_prompts.py --knowledge-item core/knowledge/examples/knowledge-item.sample.json --out-dir /tmp/openstaff-llm-prompts

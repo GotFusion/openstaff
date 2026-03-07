@@ -191,14 +191,20 @@
 - [x] “老师确认后执行”全链路可演示（`make assist ARGS="--knowledge-item core/knowledge/examples/knowledge-item.sample.json --auto-confirm yes"`）。
 
 ### TODO 4.3 学生模式闭环
-- [ ] 输入任务目标 -> 自动规划 -> 调用技能执行。
-- [ ] 输出结构化审阅报告。
+- [x] 输入任务目标 -> 自动规划 -> 调用技能执行。
+- [x] 输出结构化审阅报告。
 
 **输出物**
-- 学生模式最小链路。
+- `core/orchestrator/StudentModeLoop.swift`
+- `core/orchestrator/student-mode-loop-v0.md`
+- `core/contracts/StudentModeContracts.swift`
+- `core/executor/StudentSkillExecutor.swift`
+- `core/storage/StudentLoopLogWriter.swift`
+- `core/storage/StudentReviewReportWriter.swift`
+- `apps/macos/Sources/OpenStaffStudentCLI/*`
 
 **验收标准**
-- [ ] 演示 1 条完整自主执行任务。
+- [x] 演示 1 条完整自主执行任务（`make student ARGS="--goal '在 Safari 中复现点击流程' --knowledge core/knowledge/examples/knowledge-item.sample.json"`）。
 
 ---
 

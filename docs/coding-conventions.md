@@ -33,6 +33,7 @@
 - 任务切片：`data/task-chunks/{yyyy-mm-dd}/{taskId}.json`
 - 知识条目：`data/knowledge/{yyyy-mm-dd}/{taskId}.json`
 - 执行日志：`data/logs/{yyyy-mm-dd}/{sessionId}-{component}.log`
+- 学生审阅报告：`data/reports/{yyyy-mm-dd}/{sessionId}-{taskId}-student-review.json`
 
 说明：
 - `sessionId`、`taskId` 使用小写字母+数字+短横线（UUID 推荐）。
