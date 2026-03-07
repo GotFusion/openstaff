@@ -135,14 +135,15 @@
 - [x] 同一输入可稳定输出结构化步骤（提示词渲染采用规范化 JSON；输出可被严格校验）。
 
 ### TODO 3.2 ChatGPT 调用适配层
-- [ ] 封装重试、超时、限流。
-- [ ] 记录请求摘要（不落敏感原文）。
+- [x] 封装重试、超时、限流。
+- [x] 记录请求摘要（不落敏感原文）。
 
 **输出物**
-- `scripts/llm` 调用器。
+- `scripts/llm/chatgpt_adapter.py`
+- `scripts/llm/README.md`（调用方式与离线验证说明）
 
 **验收标准**
-- [ ] 网络抖动时可自动重试并出错误报告。
+- [x] 网络抖动时可自动重试并出错误报告（离线 text provider 支持瞬时失败模拟验证重试链路）。
 
 ### TODO 3.3 OpenClaw skill 映射器
 - [ ] 将 `KnowledgeItem` + LLM 结果映射为 OpenClaw 技能格式。
@@ -265,7 +266,7 @@
 
 ### Day 5
 - [x] 完成提示词模板 v0。
-- [ ] 跑通 1 条知识 -> LLM 结构化输出。
+- [x] 跑通 1 条知识 -> LLM 结构化输出（离线 text provider）。
 
 ### Day 6
 - [ ] 完成 OpenClaw skill 映射 v0。

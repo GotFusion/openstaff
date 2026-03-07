@@ -16,6 +16,8 @@ make slice
 make knowledge
 make llm-prompts
 make llm-validate
+make llm-call
+make llm-retry-demo
 ```
 
 - `make build`：构建 `apps/macos` 最小壳应用。
@@ -25,6 +27,8 @@ make llm-validate
 - `make knowledge`：启动 Phase 2.3 知识构建 CLI（task chunks -> knowledge items + rule summary）。
 - `make llm-prompts`：渲染 Phase 3.1 提示词模板（KnowledgeItem -> system/user prompts）。
 - `make llm-validate`：校验 LLM 结构化输出样例（强制 JSON + 一致性检查）。
+- `make llm-call`：运行 Phase 3.2 调用适配层（默认离线 `text` provider，输出到 `/tmp/openstaff-llm-call-output.json`）。
+- `make llm-retry-demo`：离线模拟 2 次瞬时失败，验证重试与错误报告链路。
 
 ## 目录概览
 

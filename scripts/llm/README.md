@@ -1,6 +1,6 @@
 # scripts/llm/
 
-LLM 解析与提示词模板工具目录（Phase 3.1）。
+LLM 解析与调用适配工具目录（Phase 3.1 + Phase 3.2）。
 
 ## 已实现（TODO 3.1）
 - `prompts/system-knowledge-parser-v0.md`
@@ -15,6 +15,13 @@ LLM 解析与提示词模板工具目录（Phase 3.1）。
   - 强制 JSON 提取与严格校验（可选与原始 `KnowledgeItem` 做一致性比对）。
 - `examples/knowledge-parse-output.sample.json`
   - 结构化输出样例。
+
+## 已实现（TODO 3.2）
+- `chatgpt_adapter.py`
+  - ChatGPT 调用适配层（provider 抽象、超时、重试、限流、错误报告）。
+  - 默认支持离线 `text` provider（无需 API），用于当前开发阶段本地验证。
+  - 支持 `openai` provider（`/v1/chat/completions`），待 API 可用时可直接切换。
+  - 请求日志仅记录摘要和哈希，不落原始提示词正文。
 
 ## 使用方式
 
@@ -41,6 +48,37 @@ python3 scripts/llm/validate_knowledge_parse_output.py \
 可选参数：
 - `--normalized-output <path>`：输出提取后的规范化 JSON 文件。
 
+### 3) 调用适配层（离线文本模式，推荐）
+
+```bash
+python3 scripts/llm/chatgpt_adapter.py \
+  --provider text \
+  --knowledge-item core/knowledge/examples/knowledge-item.sample.json \
+  --output /tmp/openstaff-llm-call-output.json
+```
+
+### 4) 重试链路演示（离线模拟网络抖动）
+
+```bash
+python3 scripts/llm/chatgpt_adapter.py \
+  --provider text \
+  --knowledge-item core/knowledge/examples/knowledge-item.sample.json \
+  --simulate-transient-failures 2 \
+  --max-retries 3 \
+  --output /tmp/openstaff-llm-retry-demo-output.json
+```
+
+### 5) OpenAI 模式（待 API 可用后）
+
+```bash
+export OPENAI_API_KEY="***"
+python3 scripts/llm/chatgpt_adapter.py \
+  --provider openai \
+  --model gpt-4.1-mini \
+  --knowledge-item core/knowledge/examples/knowledge-item.sample.json \
+  --output /tmp/openstaff-llm-openai-output.json
+```
+
 ## 约束说明
 - 模型响应必须只包含 JSON 对象。
 - 必须匹配 `schemas/knowledge-parse-output.schema.json` 的字段和枚举约束。
@@ -48,3 +86,6 @@ python3 scripts/llm/validate_knowledge_parse_output.py \
   - ID、上下文、步骤顺序、源事件引用一致性。
   - `objective == KnowledgeItem.goal`。
   - `safetyNotes` 与约束描述顺序一致。
+- `chatgpt_adapter.py` 默认写入结构化日志到：
+  - `data/logs/{yyyy-mm-dd}/{sessionId}-llm-adapter.log`
+  - 每条日志至少包含 `timestamp/traceId/sessionId/taskId/component/status`。

@@ -6,7 +6,7 @@ SLICE_TARGET := OpenStaffTaskSlicerCLI
 KNOWLEDGE_TARGET := OpenStaffKnowledgeBuilderCLI
 ARGS ?=
 
-.PHONY: build dev capture slice knowledge llm-prompts llm-validate
+.PHONY: build dev capture slice knowledge llm-prompts llm-validate llm-call llm-retry-demo
 
 build:
 	swift build --package-path $(APP_PACKAGE_PATH)
@@ -28,3 +28,9 @@ llm-prompts:
 
 llm-validate:
 	python3 scripts/llm/validate_knowledge_parse_output.py --input scripts/llm/examples/knowledge-parse-output.sample.json --knowledge-item core/knowledge/examples/knowledge-item.sample.json
+
+llm-call:
+	python3 scripts/llm/chatgpt_adapter.py --provider text --knowledge-item core/knowledge/examples/knowledge-item.sample.json --output /tmp/openstaff-llm-call-output.json $(ARGS)
+
+llm-retry-demo:
+	python3 scripts/llm/chatgpt_adapter.py --provider text --knowledge-item core/knowledge/examples/knowledge-item.sample.json --simulate-transient-failures 2 --max-retries 3 --output /tmp/openstaff-llm-retry-demo-output.json $(ARGS)
