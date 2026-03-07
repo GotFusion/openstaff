@@ -30,6 +30,7 @@
 
 - 根目录：`data/`
 - 原始事件：`data/raw-events/{yyyy-mm-dd}/{sessionId}.jsonl`
+- 任务切片：`data/task-chunks/{yyyy-mm-dd}/{taskId}.json`
 - 知识条目：`data/knowledge/{yyyy-mm-dd}/{taskId}.json`
 - 执行日志：`data/logs/{yyyy-mm-dd}/{sessionId}-{component}.log`
 

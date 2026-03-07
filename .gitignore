@@ -12,6 +12,9 @@ apps/macos/.swiftpm/
 data/raw-events/*
 !data/raw-events/.gitkeep
 
+data/task-chunks/*
+!data/task-chunks/.gitkeep
+
 data/knowledge/*
 !data/knowledge/.gitkeep
 

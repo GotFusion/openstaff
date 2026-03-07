@@ -265,9 +265,9 @@ struct TaskChunkWriter {
     func write(
         chunks: [TaskChunk],
         dateKey: String,
-        knowledgeRootDirectory: URL
+        taskChunkRootDirectory: URL
     ) throws -> [URL] {
-        let outputDirectory = knowledgeRootDirectory.appendingPathComponent(dateKey, isDirectory: true)
+        let outputDirectory = taskChunkRootDirectory.appendingPathComponent(dateKey, isDirectory: true)
 
         do {
             try fileManager.createDirectory(at: outputDirectory, withIntermediateDirectories: true, attributes: nil)
@@ -341,7 +341,7 @@ enum TaskChunkWriterError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .createOutputDirectoryFailed(let path, let error):
-            return "Failed to create knowledge output directory \(path): \(error.localizedDescription)"
+            return "Failed to create task chunk output directory \(path): \(error.localizedDescription)"
         case .writeChunkFailed(let path, let error):
             return "Failed to write task chunk file \(path): \(error.localizedDescription)"
         }

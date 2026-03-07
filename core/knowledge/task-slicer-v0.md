@@ -52,5 +52,5 @@
 
 ## 6. 输出落地约定
 
-- 输出目录：`data/knowledge/{yyyy-mm-dd}/`
+- 输出目录：`data/task-chunks/{yyyy-mm-dd}/`
 - 输出文件：`{taskId}.json`

@@ -9,7 +9,8 @@ let package = Package(
     products: [
         .executable(name: "OpenStaffApp", targets: ["OpenStaffApp"]),
         .executable(name: "OpenStaffCaptureCLI", targets: ["OpenStaffCaptureCLI"]),
-        .executable(name: "OpenStaffTaskSlicerCLI", targets: ["OpenStaffTaskSlicerCLI"])
+        .executable(name: "OpenStaffTaskSlicerCLI", targets: ["OpenStaffTaskSlicerCLI"]),
+        .executable(name: "OpenStaffKnowledgeBuilderCLI", targets: ["OpenStaffKnowledgeBuilderCLI"])
     ],
     targets: [
         .executableTarget(
@@ -23,6 +24,10 @@ let package = Package(
         .executableTarget(
             name: "OpenStaffTaskSlicerCLI",
             path: "Sources/OpenStaffTaskSlicerCLI"
+        ),
+        .executableTarget(
+            name: "OpenStaffKnowledgeBuilderCLI",
+            path: "Sources/OpenStaffKnowledgeBuilderCLI"
         )
     ]
 )

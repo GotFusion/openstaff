@@ -13,12 +13,14 @@ make build
 make dev
 make capture
 make slice
+make knowledge
 ```
 
 - `make build`：构建 `apps/macos` 最小壳应用。
 - `make dev`：启动 macOS 最小空应用（Phase 0 验收命令）。
-- `make capture`：启动 Phase 1.2 最小采集 CLI（全局点击监听 + 上下文抓取）。
+- `make capture`：启动 Phase 1.3 采集 CLI（全局点击监听 + 上下文抓取 + JSONL 落盘轮转）。
 - `make slice`：启动 Phase 2.1 任务切片 CLI（session raw-events -> task chunks）。
+- `make knowledge`：启动 Phase 2.2 知识构建 CLI（task chunks -> knowledge items）。
 
 ## 目录概览
 
@@ -28,7 +30,7 @@ make slice
 - `modules/`：三大工作模式（教学、辅助、学生）。
 - `scripts/`：脚本与工具（知识解析、技能转换、自动化任务）。
 - `config/`：配置模板与环境变量说明。
-- `data/`：本地开发数据（raw events / knowledge / logs）。
+- `data/`：本地开发数据（raw events / task chunks / knowledge / logs）。
 - `tests/`：测试策略与未来测试用例组织。
 - `docs/`：项目方案、阶段计划、编码规范与 ADR。
 - `assets/`：UI 原型、图标、演示素材。

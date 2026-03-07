@@ -90,14 +90,18 @@
 - [x] 可将 1 个 session 自动切分为多个任务片段。
 
 ### TODO 2.2 知识条目格式定义
-- [ ] 定义 `KnowledgeItem`（目标、步骤、上下文、约束）。
-- [ ] 增加版本号字段（schemaVersion）。
+- [x] 定义 `KnowledgeItem`（目标、步骤、上下文、约束）。
+- [x] 增加版本号字段（schemaVersion）。
 
 **输出物**
 - `data/knowledge/*.json`
+- `core/contracts/KnowledgeItemContracts.swift`
+- `core/knowledge/knowledge-item-v0.md`
+- `core/knowledge/schemas/knowledge-item.schema.json`
+- `apps/macos/Sources/OpenStaffKnowledgeBuilderCLI/*`
 
 **验收标准**
-- [ ] 任意任务切片都能映射为合法 `KnowledgeItem`。
+- [x] 任意任务切片都能映射为合法 `KnowledgeItem`。
 
 ### TODO 2.3 自动总结初版（无 LLM）
 - [ ] 用规则生成步骤摘要（例如“打开 X -> 点击 Y -> 输入 Z”）。
@@ -249,8 +253,8 @@
 - [ ] 完成 session 文件切分。
 
 ### Day 4
-- [ ] 做任务切片规则 v0。
-- [ ] 产出首个 `KnowledgeItem` 示例。
+- [x] 做任务切片规则 v0。
+- [x] 产出首个 `KnowledgeItem` 示例。
 
 ### Day 5
 - [ ] 完成提示词模板 v0。

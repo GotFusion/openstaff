@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openstaff.local/schemas/knowledge-item.schema.json",
+  "title": "KnowledgeItem",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "knowledgeItemId",
+    "taskId",
+    "sessionId",
+    "goal",
+    "steps",
+    "context",
+    "constraints",
+    "source",
+    "createdAt",
+    "generatorVersion"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "knowledge.item.v0"
+    },
+    "knowledgeItemId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "taskId": {
+      "type": "string",
+      "pattern": "^task-[a-z0-9-]+-[0-9]{3}$"
+    },
+    "sessionId": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "goal": {
+      "type": "string",
+      "minLength": 1
+    },
+    "steps": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["stepId", "instruction", "sourceEventIds"],
+        "properties": {
+          "stepId": {
+            "type": "string",
+            "pattern": "^step-[0-9]{3}$"
+          },
+          "instruction": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sourceEventIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "context": {
+      "type": "object",
+      "required": ["appName", "appBundleId"],
+      "properties": {
+        "appName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "appBundleId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "windowTitle": {
+          "type": ["string", "null"]
+        },
+        "windowId": {
+          "type": ["string", "null"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "constraints": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["type", "description"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "frontmostAppMustMatch",
+              "manualConfirmationRequired",
+              "coordinateTargetMayDrift"
+            ]
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "taskChunkSchemaVersion",
+        "startTimestamp",
+        "endTimestamp",
+        "eventCount",
+        "boundaryReason"
+      ],
+      "properties": {
+        "taskChunkSchemaVersion": {
+          "type": "string",
+          "const": "knowledge.task-chunk.v0"
+        },
+        "startTimestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "endTimestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "eventCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "boundaryReason": {
+          "type": "string",
+          "enum": ["idleGap", "contextSwitch", "sessionEnd"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "generatorVersion": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": false
+}

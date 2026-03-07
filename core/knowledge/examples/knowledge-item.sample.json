@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "knowledge.item.v0",
+  "knowledgeItemId": "ki-task-session-20260307-a1-001",
+  "taskId": "task-session-20260307-a1-001",
+  "sessionId": "session-20260307-a1",
+  "goal": "在 Safari 中复现任务 task-session-20260307-a1-001 的操作流程",
+  "steps": [
+    {
+      "stepId": "step-001",
+      "instruction": "执行第 1 步点击操作（源事件 11111111-1111-4111-8111-111111111111）。",
+      "sourceEventIds": [
+        "11111111-1111-4111-8111-111111111111"
+      ]
+    },
+    {
+      "stepId": "step-002",
+      "instruction": "执行第 2 步点击操作（源事件 22222222-2222-4222-8222-222222222222）。",
+      "sourceEventIds": [
+        "22222222-2222-4222-8222-222222222222"
+      ]
+    }
+  ],
+  "context": {
+    "appName": "Safari",
+    "appBundleId": "com.apple.Safari",
+    "windowTitle": "OpenStaff - GitHub",
+    "windowId": "1452"
+  },
+  "constraints": [
+    {
+      "type": "frontmostAppMustMatch",
+      "description": "执行前前台应用必须是 com.apple.Safari。"
+    },
+    {
+      "type": "manualConfirmationRequired",
+      "description": "执行该知识条目时，需要老师确认后再执行。"
+    },
+    {
+      "type": "coordinateTargetMayDrift",
+      "description": "坐标点击目标可能随分辨率或界面变化漂移。"
+    }
+  ],
+  "source": {
+    "taskChunkSchemaVersion": "knowledge.task-chunk.v0",
+    "startTimestamp": "2026-03-07T14:12:23+08:00",
+    "endTimestamp": "2026-03-07T14:12:25+08:00",
+    "eventCount": 2,
+    "boundaryReason": "idleGap"
+  },
+  "createdAt": "2026-03-07T14:20:00+08:00",
+  "generatorVersion": "rule-v0"
+}

@@ -25,12 +25,12 @@ struct OpenStaffTaskSlicerCLI {
             let outputFiles = try writer.write(
                 chunks: chunks,
                 dateKey: options.dateKey,
-                knowledgeRootDirectory: options.knowledgeRootDirectoryURL
+                taskChunkRootDirectory: options.taskChunkRootDirectoryURL
             )
 
             print("Task slicing completed. sessionId=\(options.sessionId) date=\(options.dateKey) events=\(loaded.events.count) chunks=\(chunks.count)")
             print("Source files=\(loaded.sourceFiles.count) output files=\(outputFiles.count)")
-            print("Knowledge output directory: \(options.knowledgeRootDirectoryURL.appendingPathComponent(options.dateKey, isDirectory: true).path)")
+            print("Task chunk output directory: \(options.taskChunkRootDirectoryURL.appendingPathComponent(options.dateKey, isDirectory: true).path)")
 
             if options.printJSON {
                 let encoder = JSONEncoder()
@@ -58,7 +58,8 @@ struct OpenStaffTaskSlicerCLI {
           --session-id <id>               Session ID to slice (lowercase letters, numbers, hyphen).
           --date <yyyy-mm-dd>             Date partition to read/write. Default: today (local timezone).
           --raw-root <path>               Raw event root directory. Default: data/raw-events
-          --knowledge-root <path>         Knowledge output root directory. Default: data/knowledge
+          --task-chunk-root <path>        Task chunk output root directory. Default: data/task-chunks
+          --knowledge-root <path>         Deprecated alias for --task-chunk-root.
           --idle-gap-seconds <n>          Idle threshold in seconds for splitting. Default: 20
           --disable-context-switch-split  Disable app/window context-switch split rule.
           --json                          Print generated TaskChunk JSON lines.
@@ -69,13 +70,13 @@ struct OpenStaffTaskSlicerCLI {
 
 struct TaskSlicerCLIOptions {
     static let defaultRawRoot = "data/raw-events"
-    static let defaultKnowledgeRoot = "data/knowledge"
+    static let defaultTaskChunkRoot = "data/task-chunks"
     static let defaultIdleGapSeconds: TimeInterval = 20
 
     let sessionId: String
     let dateKey: String
     let rawRootDirectory: String
-    let knowledgeRootDirectory: String
+    let taskChunkRootDirectory: String
     let idleGapSeconds: TimeInterval
     let splitOnContextSwitch: Bool
     let printJSON: Bool
@@ -85,7 +86,7 @@ struct TaskSlicerCLIOptions {
         var sessionId: String?
         var dateKey = defaultDateKey()
         var rawRootDirectory = defaultRawRoot
-        var knowledgeRootDirectory = defaultKnowledgeRoot
+        var taskChunkRootDirectory = defaultTaskChunkRoot
         var idleGapSeconds = defaultIdleGapSeconds
         var splitOnContextSwitch = true
         var printJSON = false
@@ -114,12 +115,18 @@ struct TaskSlicerCLIOptions {
                     throw TaskSlicerCLIOptionError.missingValue("--raw-root")
                 }
                 rawRootDirectory = arguments[index]
+            case "--task-chunk-root":
+                index += 1
+                guard index < arguments.count else {
+                    throw TaskSlicerCLIOptionError.missingValue("--task-chunk-root")
+                }
+                taskChunkRootDirectory = arguments[index]
             case "--knowledge-root":
                 index += 1
                 guard index < arguments.count else {
                     throw TaskSlicerCLIOptionError.missingValue("--knowledge-root")
                 }
-                knowledgeRootDirectory = arguments[index]
+                taskChunkRootDirectory = arguments[index]
             case "--idle-gap-seconds":
                 index += 1
                 guard index < arguments.count else {
@@ -148,7 +155,7 @@ struct TaskSlicerCLIOptions {
                 sessionId: sessionId ?? "session-placeholder",
                 dateKey: dateKey,
                 rawRootDirectory: rawRootDirectory,
-                knowledgeRootDirectory: knowledgeRootDirectory,
+                taskChunkRootDirectory: taskChunkRootDirectory,
                 idleGapSeconds: idleGapSeconds,
                 splitOnContextSwitch: splitOnContextSwitch,
                 printJSON: printJSON,
@@ -170,7 +177,7 @@ struct TaskSlicerCLIOptions {
             sessionId: resolvedSessionId,
             dateKey: dateKey,
             rawRootDirectory: rawRootDirectory,
-            knowledgeRootDirectory: knowledgeRootDirectory,
+            taskChunkRootDirectory: taskChunkRootDirectory,
             idleGapSeconds: idleGapSeconds,
             splitOnContextSwitch: splitOnContextSwitch,
             printJSON: printJSON,
@@ -200,8 +207,8 @@ struct TaskSlicerCLIOptions {
         resolve(path: rawRootDirectory)
     }
 
-    var knowledgeRootDirectoryURL: URL {
-        resolve(path: knowledgeRootDirectory)
+    var taskChunkRootDirectoryURL: URL {
+        resolve(path: taskChunkRootDirectory)
     }
 
     var slicingPolicy: TaskSlicingPolicy {

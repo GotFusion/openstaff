@@ -10,6 +10,7 @@ From repository root:
 make dev
 make capture
 make slice
+make knowledge
 ```
 
 ## Build
@@ -24,6 +25,7 @@ make build
 - `Sources/OpenStaffApp/OpenStaffApp.swift`: minimal window for baseline validation.
 - `Sources/OpenStaffCaptureCLI/`: Phase 1.3 capture CLI (permission check, click capture, context snapshot, JSONL persistence + rotation).
 - `Sources/OpenStaffTaskSlicerCLI/`: Phase 2.1 task slicer CLI (session events -> TaskChunk files).
+- `Sources/OpenStaffKnowledgeBuilderCLI/`: Phase 2.2 knowledge builder CLI (TaskChunk -> KnowledgeItem).
 
 ## Capture CLI
 
@@ -56,6 +58,19 @@ make slice ARGS="--session-id session-20260307-a1 --idle-gap-seconds 30 --json"
 ```
 
 Task chunks are written to:
+- `data/task-chunks/{yyyy-mm-dd}/{taskId}.json`
+
+## Knowledge Builder CLI
+
+```bash
+# Build KnowledgeItem files from task chunks
+make knowledge ARGS="--session-id session-20260307-a1 --date 2026-03-07"
+
+# Print generated KnowledgeItem JSON lines
+make knowledge ARGS="--session-id session-20260307-a1 --json"
+```
+
+Knowledge items are written to:
 - `data/knowledge/{yyyy-mm-dd}/{taskId}.json`
 
 ## Planned Features

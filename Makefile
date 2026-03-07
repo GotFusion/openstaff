@@ -3,9 +3,10 @@ APP_PACKAGE_PATH := apps/macos
 APP_TARGET := OpenStaffApp
 CAPTURE_TARGET := OpenStaffCaptureCLI
 SLICE_TARGET := OpenStaffTaskSlicerCLI
+KNOWLEDGE_TARGET := OpenStaffKnowledgeBuilderCLI
 ARGS ?=
 
-.PHONY: build dev capture slice
+.PHONY: build dev capture slice knowledge
 
 build:
 	swift build --package-path $(APP_PACKAGE_PATH)
@@ -18,3 +19,6 @@ capture:
 
 slice:
 	swift run --package-path $(APP_PACKAGE_PATH) $(SLICE_TARGET) $(ARGS)
+
+knowledge:
+	swift run --package-path $(APP_PACKAGE_PATH) $(KNOWLEDGE_TARGET) $(ARGS)
